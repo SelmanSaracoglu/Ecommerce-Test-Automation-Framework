@@ -19,7 +19,6 @@ public class BasePage {
     /**
      * Constructor for BasePage.
      * Initializes the WebDriver and sets up Explicit Wait.
-     *
      * @param driver The WebDriver instance from the Test class.
      */
     public BasePage(WebDriver driver) {
@@ -31,7 +30,6 @@ public class BasePage {
     /**
      * Waits for the element to be clickable and performs a click action.
      * This ensures the element is ready before interacting, reducing flakiness.
-     *
      * @param locator The By locator of the element to click.
      */
     protected void click(By locator) {
@@ -41,7 +39,6 @@ public class BasePage {
     /**
      * Waits for the element to be visible, clears any existing text,
      * and sends the new keys.
-     *
      * @param locator The By locator of the input field.
      * @param text    The text to be entered.
      */
@@ -53,7 +50,6 @@ public class BasePage {
 
     /**
      * Waits for the element to be visible and retrieves its text.
-     *
      * @param locator The By locator of the element.
      * @return The visible text of the element.
      */
@@ -64,7 +60,6 @@ public class BasePage {
     /**
      * Checks if an element is displayed on the page.
      * Handles exceptions if the element is not found within the wait time.
-     *
      * @param locator The By locator of the element.
      * @return true if the element is displayed, false otherwise.
      */
@@ -87,13 +82,18 @@ public class BasePage {
         dropdown.selectByVisibleText(text);
     }
 
-    /**
-     * Waits until an element has a specific attribute value.
-     * Example: Wait until 'class' attribute contains 'active'.
-     */
+    /* Selects a radio button or checkbox if it is not already selected. */
+    protected void selectCheckbox(By locator) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        if (!element.isSelected()) {
+            element.click();
+        }
+    }
+
+    /*  Waits until an element has a specific attribute value.
+        Example: Wait until 'class' attribute contains 'active'.    */
+
     protected void waitForAttributeContains(By locator, String attribute, String value) {
         wait.until(ExpectedConditions.attributeContains(locator, attribute, value));
     }
-
-
 }

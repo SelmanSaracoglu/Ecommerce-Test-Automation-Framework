@@ -159,8 +159,8 @@ public class HomePage extends BasePage {
     }
 
     // Navigation
-    public LoginPage clickSignupLogin() {
+    public SignupLoginPage clickSignupLogin() {
         click(signupLoginLink);
-        return new LoginPage(driver);
+        return new SignupLoginPage(driver);
     }
 }
