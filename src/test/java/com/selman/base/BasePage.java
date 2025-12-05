@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -73,6 +74,25 @@ public class BasePage {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    /**
+     * Selects an option from a dropdown by visible text.
+     * @param locator The locator of the <select> element
+     * @param text The visible text to select
+     */
+    protected void selectByVisibleText(By locator, String text) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        Select dropdown = new Select(element);
+        dropdown.selectByVisibleText(text);
+    }
+
+    /**
+     * Waits until an element has a specific attribute value.
+     * Example: Wait until 'class' attribute contains 'active'.
+     */
+    protected void waitForAttributeContains(By locator, String attribute, String value) {
+        wait.until(ExpectedConditions.attributeContains(locator, attribute, value));
     }
 
 
