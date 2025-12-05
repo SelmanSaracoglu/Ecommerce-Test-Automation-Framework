@@ -16,6 +16,8 @@ public class SignupLoginPage extends BasePage {
     private final By signupEmailInput = By.cssSelector("input[data-qa='signup-email']");
     private final By signupButton = By.cssSelector("button[data-qa='signup-button']");
 
+    private final By loggedInAsText = By.xpath("//li[contains(text(), 'Logged in as')]");
+
     // Constructor
     public SignupLoginPage(WebDriver driver) {
         super(driver);
@@ -23,6 +25,11 @@ public class SignupLoginPage extends BasePage {
 
     // --- Actions ---
 
+    /**
+     * Performs login with existing credentials.
+     * @param email Registered email
+     * @param password Registered password
+     */
     public void login(String email, String password) {
         type(loginEmailInput, email);
         type(loginPasswordInput, password);
@@ -42,5 +49,14 @@ public class SignupLoginPage extends BasePage {
         type(signupEmailInput, email);
         click(signupButton);
         return new SignupPage(driver); // Sayfa geçişi olduğu için yeni objeyi dönüyoruz
+    }
+
+    /**
+     * Retrieves the 'Logged in as [Username]' text from the header.
+     * Essential for verifying that the user session is active.
+     * @return Full text string (e.g., "Logged in as John")
+     */
+    public String getLoggedInUserText() {
+        return getText(loggedInAsText);
     }
 }
