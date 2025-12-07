@@ -1,7 +1,9 @@
 package com.selman.tests;
 
 import com.selman.pages.*;
+import com.selman.utils.ConfigReader;
 import com.selman.utils.DataUtils;
+import org.openqa.selenium.devtools.v85.runtime.Runtime;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -88,5 +90,40 @@ public class RegisterTest extends BaseTest{
         deletedPage.clickContinue();
 
         System.out.println("Test Cycle Completed Successfully: Register -> Login -> Delete");
+    }
+
+    @Test(description = "Test Case 5: Register User with existing email")
+    public void testRegisterWithExistingEmail() {
+
+        HomePage homePage = new HomePage(driver);
+        homePage.acceptCookies();
+
+        // 3. Verify that home page is visible successfully
+        Assert.assertTrue(homePage.isLogoVisible(),"Home Page is not visible!");
+
+        // 4. Click on 'Signup / Login' button
+        SignupLoginPage loginPage = homePage.clickSignupLogin();
+
+        // 5. Verify 'New User Signup!' is visible
+        Assert.assertTrue(loginPage.isNewUserSignupHeaderVisible(), "'New User Signup!' header is not visible!");
+
+        // 6. Enter name and ALREADY REGISTERED email address
+        // Strategy: We use the 'valid_email' from config.properties
+        String name = "Existing User";
+        String existingEmail = ConfigReader.getProperty("valid_email");
+
+        System.out.println("Testing Registration with Existing Email: " + existingEmail);
+
+        // 7. Click 'Signup' button
+        loginPage.signup(name, existingEmail);
+
+        // 8. Verify error 'Email Address already exist!' is visible
+        Assert.assertTrue(loginPage.isEmailAlreadyExistsErrorVisible(),
+                "Error message 'Email Address already exist!' is NOT visible!");
+
+
+
+
+
     }
 }

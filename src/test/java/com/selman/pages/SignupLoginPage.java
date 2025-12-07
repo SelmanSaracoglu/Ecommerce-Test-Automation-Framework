@@ -12,10 +12,19 @@ public class SignupLoginPage extends BasePage {
     private final By loginButton = By.cssSelector("button[data-qa='login-button']");
 
     // --- SIGNUP LOCATORS (Burası kritik!) ---
-    private final By signupNameInput = By.cssSelector("input[data-qa='signup-name']");
-    private final By signupEmailInput = By.cssSelector("input[data-qa='signup-email']");
-    private final By signupButton = By.cssSelector("button[data-qa='signup-button']");
+    private final By signupNameInput =
+            By.cssSelector("input[data-qa='signup-name']");
+    private final By signupEmailInput =
+            By.cssSelector("input[data-qa='signup-email']");
+    private final By signupButton =
+            By.cssSelector("button[data-qa='signup-button']");
+    private final By emailExistsErrorMessage =
+            By.xpath("//p[contains(text(), 'Email Address already exist!')]");
 
+    // After Successful Signup
+    private final By newUserSignupHeader = By.xpath("//h2[contains(text(), 'New User Signup!')]");
+
+    // After Successful Login
     private final By loggedInAsText = By.xpath("//a[contains(., 'Logged in as')]");
 
     // Constructor
@@ -39,7 +48,6 @@ public class SignupLoginPage extends BasePage {
     /**
      * Fills the "New User Signup!" section and clicks the Signup button.
      * This action redirects the user to the SignupPage (Form).
-     *
      * @param name  New user's name
      * @param email New user's email (Must be unique)
      * @return SignupPage object (Fluent Interface)
@@ -58,5 +66,15 @@ public class SignupLoginPage extends BasePage {
      */
     public String getLoggedInUserText() {
         return getText(loggedInAsText);
+    }
+
+    // Verifies if the 'New User Signup!' header is visible.
+    public boolean isNewUserSignupHeaderVisible() {
+        return isDisplayed(newUserSignupHeader);
+    }
+
+    // Verifies if the 'Email Address already exist!' error message is displayed.
+    public boolean isEmailAlreadyExistsErrorVisible() {
+        return isDisplayed(emailExistsErrorMessage);
     }
 }
