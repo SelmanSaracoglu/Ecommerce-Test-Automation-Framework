@@ -175,4 +175,9 @@ public class HomePage extends BasePage {
         click(logoutLink);
         return new SignupLoginPage(driver);
     }
+
+    public ContactUsPage clickContactUs() {
+        click(contactUsLink);
+        return new ContactUsPage(driver);
+    }
 }
