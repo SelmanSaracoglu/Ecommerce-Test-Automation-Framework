@@ -180,4 +180,13 @@ public class HomePage extends BasePage {
         click(contactUsLink);
         return new ContactUsPage(driver);
     }
+
+    /**
+     * Clicks on the 'Test Cases' button in the header.
+     * @return TestCasesPage object
+     */
+    public TestCasesPage clickTestCases() {
+        click(testCasesLink);
+        return new TestCasesPage(driver);
+    }
 }
