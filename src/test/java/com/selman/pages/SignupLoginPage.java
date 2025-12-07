@@ -16,7 +16,7 @@ public class SignupLoginPage extends BasePage {
     private final By signupEmailInput = By.cssSelector("input[data-qa='signup-email']");
     private final By signupButton = By.cssSelector("button[data-qa='signup-button']");
 
-    private final By loggedInAsText = By.xpath("//li[contains(text(), 'Logged in as')]");
+    private final By loggedInAsText = By.xpath("//a[contains(., 'Logged in as')]");
 
     // Constructor
     public SignupLoginPage(WebDriver driver) {

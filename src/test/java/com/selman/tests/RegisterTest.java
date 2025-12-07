@@ -1,9 +1,6 @@
 package com.selman.tests;
 
-import com.selman.pages.AccountCreatedPage;
-import com.selman.pages.HomePage;
-import com.selman.pages.SignupLoginPage;
-import com.selman.pages.SignupPage;
+import com.selman.pages.*;
 import com.selman.utils.DataUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -83,10 +80,13 @@ public class RegisterTest extends BaseTest{
         System.out.println("Deleting account to clean up...");
         driver.get("https://automationexercise.com/delete_account");
 
-        // Verify deletion
-        // We can reuse AccountCreatedPage logic or add a check here.
-        // For this showcase, assuming URL check is enough or adding a simple check.
-        boolean isDeleted = driver.getPageSource().contains("ACCOUNT DELETED");
-        Assert.assertTrue(isDeleted, "Account was not deleted!");
+        AccountDeletedPage deletedPage = new AccountDeletedPage(driver);
+
+        Assert.assertTrue(deletedPage.isAccountDeletedMessageVisible(),
+                "Account deletion failed! Message not displayed.");
+
+        deletedPage.clickContinue();
+
+        System.out.println("Test Cycle Completed Successfully: Register -> Login -> Delete");
     }
 }
