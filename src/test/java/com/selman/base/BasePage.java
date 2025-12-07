@@ -15,7 +15,6 @@ public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-
     /**
      * Constructor for BasePage.
      * Initializes the WebDriver and sets up Explicit Wait.

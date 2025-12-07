@@ -11,6 +11,8 @@ public class HomePage extends BasePage {
     private final By homeLink = By.xpath("//a[contains(text(), 'Home')]");
     private final By productsLink = By.xpath("//a[contains(text(), 'Products')]");
     private final By cartLink = By.xpath("//a[contains(text(), 'Cart')]");
+    private final By logoutLink = By.xpath("//a[contains(text(), 'Logout')]");
+    private final By deleteAccountLink = By.xpath("//a[contains(text(), 'Delete Account')]");
     private final By signupLoginLink = By.xpath("//a[contains(@href, '/login')]");
     private final By testCasesLink = By.xpath("//a[contains(text(), 'Test Cases')]");
     private final By apiTestingLink = By.xpath("//a[contains(text(), 'API Testing')]");
@@ -161,6 +163,16 @@ public class HomePage extends BasePage {
     // Navigation
     public SignupLoginPage clickSignupLogin() {
         click(signupLoginLink);
+        return new SignupLoginPage(driver);
+    }
+
+    /**
+     * Clicks the Logout button in the header.
+     * This is the correct way to log out (simulating user behavior).
+     * @return LoginPage object (since logout usually redirects to login page)
+     */
+    public SignupLoginPage clickLogout() {
+        click(logoutLink);
         return new SignupLoginPage(driver);
     }
 }

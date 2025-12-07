@@ -1,5 +1,6 @@
 package com.selman.tests;
 
+import com.selman.utils.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,7 +26,11 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters("browser")
-    public void setup(@Optional("chrome") String browser) {
+    public void setup(@Optional String browser) {
+
+        if (browser == null) {
+            browser = ConfigReader.getProperty("browser");
+        }
 
         // Cross-Browser Logic: Switch based on the parameter
         switch (browser.toLowerCase()) {
@@ -56,7 +61,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
         // Navigate to the target application
-        driver.get("https://automationexercise.com");
+        driver.get(ConfigReader.getProperty("url"));
     }
 
     /**
